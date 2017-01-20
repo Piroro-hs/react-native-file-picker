@@ -50,9 +50,11 @@ class FilePicker extends ReactContextBaseJavaModule implements ActivityEventList
         }
     }
 
+    @Override
     public void onNewIntent(Intent intent) {}
 
-    public void onActivityResult(final int requestCode, final int resultCode, final Intent intent) {
+    @Override
+    public void onActivityResult(final Activity activity, final int requestCode, final int resultCode, final Intent intent) {
         if (requestCode == FILE_PICKER_REQUEST_CODE) {
             if (mFilePickerPromise != null) {
                 if (resultCode == Activity.RESULT_CANCELED) {
