@@ -14,6 +14,13 @@
     "react-native",
     "android"
   ],
+  "files": [
+    "LICENSE",
+    "README.md",
+    "package.json",
+    "android",
+    "index.js"
+  ],
   "author": "Zhenjie Ruan",
   "license": "MIT",
   "bugs": {
