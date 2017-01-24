@@ -28,7 +28,7 @@ class FilePicker extends ReactContextBaseJavaModule implements ActivityEventList
     }
 
     @ReactMethod
-    public void pickDocument(final Promise promise) {
+    public void pickDocument(final String mime, final Promise promise) {
         Activity currentActivity = getCurrentActivity();
 
         if (currentActivity == null) {
@@ -41,6 +41,7 @@ class FilePicker extends ReactContextBaseJavaModule implements ActivityEventList
         try {
             final Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
             intent.addCategory(Intent.CATEGORY_OPENABLE);
+            intent.setType(mime);
 
             currentActivity.startActivityForResult(intent, FILE_PICKER_REQUEST_CODE);
 
@@ -50,9 +51,11 @@ class FilePicker extends ReactContextBaseJavaModule implements ActivityEventList
         }
     }
 
+    @Override
     public void onNewIntent(Intent intent) {}
 
-    public void onActivityResult(final int requestCode, final int resultCode, final Intent intent) {
+    @Override
+    public void onActivityResult(final Activity activity, final int requestCode, final int resultCode, final Intent intent) {
         if (requestCode == FILE_PICKER_REQUEST_CODE) {
             if (mFilePickerPromise != null) {
                 if (resultCode == Activity.RESULT_CANCELED) {
